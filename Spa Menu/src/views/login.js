@@ -9,8 +9,8 @@ const loginTemplate = (onSubmit) => html`
             <p>Please enter your credentials.</p>
             <hr>
 
-            <p>Username</p>
-            <input placeholder="Enter Username" name="username" type="text">
+            <p>Email</p>
+            <input placeholder="Enter Email" name="email" type="text">
 
             <p>Password</p>
             <input type="password" placeholder="Enter Password" name="password">
@@ -34,10 +34,10 @@ export async function loginPage(ctx) {
         event.preventDefault();
 
         const formData = new FormData(event.target);
-        const username = formData.get('username');
+        const email = formData.get('email');
         const password = formData.get('password');
 
-        await loginApi(username,password);
+        await loginApi(email,password);
         ctx.setUserNav();
         ctx.page.redirect('/all-listings');
     }

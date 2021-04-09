@@ -2,24 +2,24 @@ import { html } from '../../node_modules/lit-html/lit-html.js';
 import {getCarsById} from '../api/data.js';
 import {deleteCar} from '../api/data.js';
 
-const detailsTemplate = (car,isOwner,onDelete) => html`
+const detailsTemplate = (item,isOwner,onDelete) => html`
 <section id="listing-details">
     <h1>Details</h1>
     <div class="details-info">
-        <img src=${car.imageUrl}>
+        <img src=${item.imageUrl}>
         <hr>
         <ul class="listing-props">
-            <li><span>Type:</span>${car.type}</li>
-            <li><span>Name:</span>${car.name}</li>
-            <li><span>Year:</span>${car.year}</li>
-            <li><span>Price:</span>${car.price}$</li>
+            <li><span>Type:</span>${item.type}</li>
+            <li><span>Name:</span>${item.name}</li>
+            <li><span>Time:</span>${item.time}</li>
+            <li><span>Price:</span>${item.price}$</li>
         </ul>
 
-        <p class="description-para">${car.description}</p>
+        <p class="description-para">${item.description}</p>
 
         ${isOwner ? html`
         <div class="listings-buttons">
-            <a href=${`/edit/${car.objectId}`} class="button-list">Edit</a>
+            <a href=${`/edit/${item.objectId}`} class="button-list">Edit</a>
             <a @click=${onDelete} href="/all-listings" class="button-list">Delete</a>
         </div>
         ` : ''}
@@ -31,18 +31,20 @@ const detailsTemplate = (car,isOwner,onDelete) => html`
 export async function detailsPage(ctx) {
 
     const id = ctx.params.id;
-    const car = await getCarsById(id);
+    const item = await getCarsById(id);
 
     const userId = sessionStorage.getItem('userId');
+    // console.log(userId);
+    // console.log(item.ownerId);
 
-    ctx.render(detailsTemplate(car,car._ownerId == userId,onDelete));
+    ctx.render(detailsTemplate(item,item._ownerId == userId,onDelete));
 
     async function onDelete(){
 
         const confirmed = confirm('Are you sure you want to delete this car-listing!');
         if(confirmed){
 
-            await deleteCar(car.objectId);
+            await deleteCar(item.objectId);
 
             ctx.page.redirect('/all-listings');
         }

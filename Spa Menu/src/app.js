@@ -50,13 +50,14 @@ function midWeare(ctx,next){
 function setUserNav(){
 
     const userId = sessionStorage.getItem('userId');
-    const username = sessionStorage.getItem('username');
+    console.log(userId);
+    const email = sessionStorage.getItem('email');
 
     if(userId != null){
 
         document.getElementById('guest').style.display = 'none';
         document.getElementById('profile').style.display = '';
-        document.getElementById('userId').textContent = `Welcome ${username}`;
+        document.getElementById('userId').textContent = `Welcome ${email}`;
     }else{
 
         document.getElementById('guest').style.display = '';
