@@ -1,6 +1,6 @@
 import * as api from '../api/api.js';
 
-const host = 'http://localhost:3030';
+const host = 'https://api.backendless.com';
 api.settings.host = host;
 
 export const login = api.login;
@@ -9,11 +9,11 @@ export const logout = api.logout;
 
 //specific requests
 export async function getAllCars(){
-    return await api.get(host + '/data/cars?sortBy=_createdOn%20desc');
+    return await api.get(host + '/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/data/test_menu');
 }
 
 export async function getCarsById(id){
-    return await api.get(host + '/data/cars/' + id);
+    return await api.get(host + '/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/data/test_menu/' + id);
 }
 
 // export async function getNumLikes(movieId){
@@ -27,11 +27,11 @@ export async function getCarsById(id){
 
 export async function getMyCars(){
    const userId = sessionStorage.getItem('userId');
-    return await api.get(host + `/data/cars?where=_ownerId%3D%22${userId}%22&sortBy=_createdOn%20desc`);
+    return await api.get(host + `/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/data/test_menu?where=_ownerId%3D%22${userId}%22&sortBy=_createdOn%20desc`);
 }
 
 export async function createCar(data){
-    return await api.post(host + '/data/cars',data);
+    return await api.post(host + '/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/data/test_menu',data);
 }
 
 // export async function createLike(data){
@@ -39,13 +39,13 @@ export async function createCar(data){
 // }
 
 export async function editCars(id, data){
-    return await api.put(host + '/data/cars/' + id, data);
+    return await api.put(host + '/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/data/test_menu/' + id, data);
 }
 
 export async function deleteCar(id){
-    return await api.del(host + '/data/cars/' + id);
+    return await api.del(host + '/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/data/test_menu/' + id);
 }
 
 export async function searchCars(query){
-    return await api.get(host + `/data/cars?where=year%3D${query}`)//url take not from test
+    return await api.get(host + `/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/data/test_menu?where=year%3D${query}`)//url take not from test
 }

@@ -9,22 +9,22 @@ const createTemplate = (onSubmit) => html`
             <p>Please fill in this form to create an listing.</p>
             <hr>
 
-            <p>Car Brand</p>
-            <input type="text" placeholder="Enter Car Brand" name="brand">
+            <p>Massage Type</p>
+            <input type="text" placeholder="Enter Car Brand" name="type">
 
-            <p>Car Model</p>
-            <input type="text" placeholder="Enter Car Model" name="model">
+            <p>Massage Name</p>
+            <input type="text" placeholder="Enter Car Model" name="name">
 
             <p>Description</p>
             <input type="text" placeholder="Enter Description" name="description">
 
-            <p>Car Year</p>
+            <p>Massage Year</p>
             <input type="number" placeholder="Enter Car Year" name="year">
 
-            <p>Car Image</p>
+            <p>Massage Image</p>
             <input type="text" placeholder="Enter Car Image" name="imageUrl">
 
-            <p>Car Price</p>
+            <p>Massage Price</p>
             <input type="number" placeholder="Enter Car Price" name="price">
 
             <hr>
@@ -42,14 +42,14 @@ export async function createPage(ctx) {
         event.preventDefault();
 
         const formData = new FormData(event.target);
-        const brand = formData.get('brand');
-        const model = formData.get('model');
+        const type = formData.get('type');
+        const name = formData.get('name');
         const description = formData.get('description');
         const year = Number(formData.get('year'));
         const imageUrl = formData.get('imageUrl');
         const price = Number(formData.get('price'));
 
-        if(brand == '' || model == '' || description == '' || year == '' || imageUrl == '' || price == ''){
+        if(type == '' || name == '' || description == '' || year == '' || imageUrl == '' || price == ''){
             return alert('All fields are required!');
         }
 
@@ -58,8 +58,8 @@ export async function createPage(ctx) {
         }
 
         const data = {
-            brand,
-            model,
+            type,
+            name,
             description,
             year,
             imageUrl,

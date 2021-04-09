@@ -12,10 +12,10 @@ const editTemplate = (car,onSubmit) => html`
                 <hr>
     
                 <p>Car Brand</p>
-                <input type="text" placeholder="Enter Car Brand" name="brand" .value=${car.brand}>
+                <input type="text" placeholder="Enter Car Brand" name="type" .value=${car.type}>
     
                 <p>Car Model</p>
-                <input type="text" placeholder="Enter Car Model" name="model" .value=${car.model}>
+                <input type="text" placeholder="Enter Car Model" name="name" .value=${car.name}>
     
                 <p>Description</p>
                 <input type="text" placeholder="Enter Description" name="description" .value=${car.description}>
@@ -38,7 +38,7 @@ const editTemplate = (car,onSubmit) => html`
 
 export async function editPage(ctx) {
 
-    const id = ctx.params.id;
+    const id = ctx.params.objectId;
     const car = await getCarsById(id);
     ctx.render(editTemplate(car,onSubmit));
 
@@ -46,8 +46,8 @@ export async function editPage(ctx) {
         event.preventDefault();
 
         const formData = new FormData(event.target);
-        const brand = formData.get('brand');
-        const model = formData.get('model');
+        const type = formData.get('type');
+        const name = formData.get('name');
         const description = formData.get('description');
         const year = formData.get('year');
         const imageUrl = formData.get('imageUrl');
@@ -58,16 +58,16 @@ export async function editPage(ctx) {
         }
 
         const data = {
-            brand,
-            model,
+            type,
+            name,
             description,
             year,
             imageUrl,
             price
         }
 
-        await editCars(car._id,data);
-        ctx.page.redirect(`/details/${car._id}`);
+        await editCars(car.objectId,data);
+        ctx.page.redirect(`/details/${car.objectId}`);
 
     }
 }
