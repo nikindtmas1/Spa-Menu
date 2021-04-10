@@ -24,7 +24,7 @@ const carTemplate = (item) => html`
     <h2>${item.type} ${item.name}</h2>
     <div class="info">
         <div class="data-info">
-            <h3>Time: ${item.time}</h3>
+            <h3>Time: ${item.time} minute</h3>
             <h3>Price: ${item.price} $</h3>
         </div>
         <div class="data-buttons">

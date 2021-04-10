@@ -18,7 +18,7 @@ const createTemplate = (onSubmit) => html`
             <p>Description</p>
             <input type="text" placeholder="Enter Description" name="description">
 
-            <p>Massage Year</p>
+            <p>Massage Time</p>
             <input type="number" placeholder="Enter Massage Time" name="time">
 
             <p>Massage Image</p>
@@ -57,13 +57,16 @@ export async function createPage(ctx) {
             return alert('The years end price must by positive number!');
         }
 
+        const _ownerId = sessionStorage.getItem('userId');
+        console.log(_ownerId);
         const data = {
             type,
             name,
             description,
             time,
             imageUrl,
-            price 
+            price,
+            _ownerId 
           }
 
 

@@ -37,6 +37,8 @@ export async function loginPage(ctx) {
         const email = formData.get('email');
         const password = formData.get('password');
 
+     
+
         await loginApi(email,password);
         ctx.setUserNav();
         ctx.page.redirect('/all-listings');

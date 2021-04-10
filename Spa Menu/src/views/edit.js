@@ -37,9 +37,11 @@ const editTemplate = (item,onSubmit) => html`
 `;
 
 export async function editPage(ctx) {
-
-    const id = ctx.params.objectId;
+   
+    const id = ctx.params.id;
+    
     const item = await getCarsById(id);
+  
     ctx.render(editTemplate(item,onSubmit));
 
     async function onSubmit(event){

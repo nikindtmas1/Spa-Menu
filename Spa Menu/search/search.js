@@ -1,12 +1,12 @@
 import { html } from '../node_modules/lit-html/lit-html.js';
 import {searchCars} from '../src/api/data.js'
 
-const searchTemplate = (data,onSearch,year) => html`
+const searchTemplate = (data,onSearch,price) => html`
 <section id="search-cars">
     <h1>Filter by year</h1>
 
     <div class="container">
-        <input id="search-input" type="text" name="search" placeholder="Enter desired production year" .value=${year || ''}>
+        <input id="search-input" type="text" name="search" placeholder="Enter desired production year" .value=${price || ''}>
         <button @click=${onSearch} class="button-list">Search</button>
     </div>
 
@@ -29,10 +29,10 @@ const itemTemplate = (item) => html`
     <div class="preview">
         <img src=${item.imageUrl}>
     </div>
-    <h2>${item.brand} ${item.model}</h2>
+    <h2>${item.type} ${item.name}</h2>
     <div class="info">
         <div class="data-info">
-            <h3>Year: ${item.year}</h3>
+            <h3>Time: ${item.time}</h3>
             <h3>Price: ${item.price} $</h3>
         </div>
         <div class="data-buttons">
@@ -44,10 +44,10 @@ const itemTemplate = (item) => html`
 
 export async function searchPage(ctx) {
     
-    const year = Number(ctx.querystring.split('=')[1]);
-    const data = Number.isNaN(year) ? [] : await searchCars(year);
+    const price = Number(ctx.querystring.split('=')[1]);
+    const data = Number.isNaN(price) ? [] : await searchCars(price);
 
-    ctx.render(searchTemplate(data,onSearch,year));
+    ctx.render(searchTemplate(data,onSearch,price));
 
     function onSearch(){
         const query = Number(document.getElementById('search-input').value);

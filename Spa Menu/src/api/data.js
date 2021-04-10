@@ -27,7 +27,7 @@ export async function getCarsById(id){
 
 export async function getMyCars(){
    const userId = sessionStorage.getItem('userId');
-    return await api.get(host + `/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/data/test_menu?where=_ownerId%3D%22${userId}%22&sortBy=_createdOn%20desc`);
+    return await api.get(host + `/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/data/test_menu/` + userId);
 }
 
 export async function createCar(data){
@@ -47,5 +47,5 @@ export async function deleteCar(id){
 }
 
 export async function searchCars(query){
-    return await api.get(host + `/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/data/test_menu?where=year%3D${query}`)//url take not from test
+    return await api.get(host + `/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/data/test_menu?props=price,${query}`)//url take not from test
 }

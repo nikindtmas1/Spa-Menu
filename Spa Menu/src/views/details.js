@@ -11,8 +11,8 @@ const detailsTemplate = (item,isOwner,onDelete) => html`
         <ul class="listing-props">
             <li><span>Type:</span>${item.type}</li>
             <li><span>Name:</span>${item.name}</li>
-            <li><span>Time:</span>${item.time}</li>
-            <li><span>Price:</span>${item.price}$</li>
+            <li><span>Time:</span>${item.time} minute</li>
+            <li><span>Price:</span>${item.price} $</li>
         </ul>
 
         <p class="description-para">${item.description}</p>
@@ -36,7 +36,7 @@ export async function detailsPage(ctx) {
     const userId = sessionStorage.getItem('userId');
     // console.log(userId);
     // console.log(item.ownerId);
-
+    
     ctx.render(detailsTemplate(item,item._ownerId == userId,onDelete));
 
     async function onDelete(){

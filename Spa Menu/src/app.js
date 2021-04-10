@@ -50,7 +50,7 @@ function midWeare(ctx,next){
 function setUserNav(){
 
     const userId = sessionStorage.getItem('userId');
-    console.log(userId);
+    
     const email = sessionStorage.getItem('email');
 
     if(userId != null){
