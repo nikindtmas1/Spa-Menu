@@ -5,7 +5,7 @@ export const settings = {
 export async function request(url,options){
     try{
     const response = await fetch(url,options);
-
+    
     if(response.ok == false){
         const error = await response.json();
         throw new Error(error.message);
@@ -66,8 +66,8 @@ export async function del(url){
     return await request(url,getOption('delete'));
 }
 
-export async function login(email,password){
-    const result = await post(settings.host + '/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/users/login', {email,password});
+export async function login(user){
+    const result = await post(settings.host + '/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/users/login', user);
    
     sessionStorage.setItem('email',result.email);
     sessionStorage.setItem('authToken',result.accessToken);
@@ -79,7 +79,7 @@ export async function login(email,password){
 //username,email,password, gender - options
 export async function register(email,password){
     const result = await post(settings.host + '/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/users/register', {email,password});//username,email,password, gender - options
-    console.log(result);
+  
     sessionStorage.setItem('email',result.email);
     sessionStorage.setItem('authToken',result.accessToken);
     sessionStorage.setItem('userId',result.objectId);

@@ -37,9 +37,17 @@ export async function loginPage(ctx) {
         const email = formData.get('email');
         const password = formData.get('password');
 
-     
+        if(email == '' || password == ''){
+            return alert("All fields are required!");
+        }
 
-        await loginApi(email,password);
+    const user = {
+        email: email,
+        password: password
+    }
+
+    console.log(user);
+        await loginApi(user);
         ctx.setUserNav();
         ctx.page.redirect('/all-listings');
     }
