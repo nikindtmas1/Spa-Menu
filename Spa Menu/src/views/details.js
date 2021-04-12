@@ -31,13 +31,12 @@ const detailsTemplate = (item,isOwner,onDelete) => html`
 export async function detailsPage(ctx) {
 
     const id = ctx.params.id;
-    const item = await getCarsById(id);
 
+    const item = await getCarsById(id);
+ 
     const userId = sessionStorage.getItem('userId');
-    // console.log(userId);
-    // console.log(item.ownerId);
     
-    ctx.render(detailsTemplate(item,item._ownerId == userId,onDelete));
+    ctx.render(detailsTemplate(item,item.ownerId == userId,onDelete));
 
     async function onDelete(){
 

@@ -51,13 +51,13 @@ function setUserNav(){
 
     const userId = sessionStorage.getItem('userId');
     
-    const email = sessionStorage.getItem('email');
+    const username = sessionStorage.getItem('username');
 
     if(userId != null){
 
         document.getElementById('guest').style.display = 'none';
         document.getElementById('profile').style.display = '';
-        document.getElementById('userId').textContent = `Welcome ${email}`;
+        document.getElementById('userId').textContent = `Welcome ${username}`;
     }else{
 
         document.getElementById('guest').style.display = '';

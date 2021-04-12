@@ -45,20 +45,20 @@ export async function createPage(ctx) {
         const type = formData.get('type');
         const name = formData.get('name');
         const description = formData.get('description');
-        const time = Number(formData.get('time'));
+        const time = formData.get('time');
         const imageUrl = formData.get('imageUrl');
-        const price = Number(formData.get('price'));
+        const price = formData.get('price');
 
         if(type == '' || name == '' || description == '' || time == '' || imageUrl == '' || price == ''){
             return alert('All fields are required!');
         }
 
-        if(time == NaN || price == NaN){
-            return alert('The years end price must by positive number!');
-        }
+        // if(time == NaN || price == NaN){
+        //     return alert('The years end price must by positive number!');
+        // }
 
-        const _ownerId = sessionStorage.getItem('userId');
-        console.log(_ownerId);
+        const ownerId = sessionStorage.getItem('userId');
+        // console.log(_ownerId);
         const data = {
             type,
             name,
@@ -66,7 +66,7 @@ export async function createPage(ctx) {
             time,
             imageUrl,
             price,
-            _ownerId 
+           ownerId 
           }
 
 

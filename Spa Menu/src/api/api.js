@@ -29,14 +29,17 @@ function getOption(method = 'get',body){
 
     const options = {
         method,
-        headers:{}
+        headers:{
+            'X-Parse-Application-Id': 'GwOuRx9b2yahh6b9Ijtko0EqBnfxxTIWUWTcyBDX',
+            'X-Parse-REST-API-Key': 'WhpWvVDJz4iOciZNlUpqRsvr19DIUCEG7n5ANMvS'
+        }
     }
 
     const token = sessionStorage.getItem('authToken');
 
     if (token != null) {
 
-        options.headers['X-Authorization'] = token;
+        options.headers['X-Parse-Session-Token'] = token;
     }
 
     if (body) {
@@ -66,22 +69,22 @@ export async function del(url){
     return await request(url,getOption('delete'));
 }
 
-export async function login(user){
-    const result = await post(settings.host + '/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/users/login', user);
+export async function login(username,password){
+    const result = await post(settings.host + '/login', {username,password});
    
-    sessionStorage.setItem('email',result.email);
-    sessionStorage.setItem('authToken',result.accessToken);
+    sessionStorage.setItem('username',result.username);
+    sessionStorage.setItem('authToken',result.sessionToken);
     sessionStorage.setItem('userId',result.objectId);
 
     return result;
 }
 
 //username,email,password, gender - options
-export async function register(email,password){
-    const result = await post(settings.host + '/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/users/register', {email,password});//username,email,password, gender - options
+export async function register(email,username,password){
+    const result = await post(settings.host + '/users', {email,username,password});//username,email,password, gender - options
   
-    sessionStorage.setItem('email',result.email);
-    sessionStorage.setItem('authToken',result.accessToken);
+    sessionStorage.setItem('username',username);
+    sessionStorage.setItem('authToken',result.sessionToken);
     sessionStorage.setItem('userId',result.objectId);
    
     
@@ -89,9 +92,9 @@ export async function register(email,password){
 }
 
 export async function logout(){
-    const result = await get(settings.host + '/37CCEB5C-F7E5-BFB6-FFAA-12879CF3A000/775F0275-7F15-48D6-87F9-41CFA9076E16/users/logout');
+    const result = await post(settings.host + '/logout', {});
 
-    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('username');
     sessionStorage.removeItem('authToken');
     sessionStorage.removeItem('userId');
     

@@ -38,6 +38,7 @@ const carTemplate = (item) => html`
 export async function myListingsCars(ctx) {
 
     const myMassages = await getMyCars();
+    console.log(myMassages);
 
     ctx.render(myTemplate(myMassages));
 }

@@ -11,6 +11,8 @@ const registerTemplate = (onSubmit) => html`
 
             <p>Email</p>
             <input type="text" placeholder="Enter Email" name="email" required>
+            <p>Username</p>
+            <input type="text" placeholder="Enter Username" name="username" required>
 
             <p>Password</p>
             <input type="password" placeholder="Enter Password" name="password" required>
@@ -39,10 +41,11 @@ export async function registerPage(ctx) {
 
         const formData = new FormData(event.target);
         const email = formData.get('email').trim();
+        const username = formData.get('username').trim();
         const password = formData.get('password').trim();
         const repass = formData.get('repeatPass').trim();
 
-        if(email == '' || password == '' || repass == ''){
+        if(email == '' || username == '' || password == '' || repass == ''){
             return alert('All fields are required!');
         }
 
@@ -51,7 +54,7 @@ export async function registerPage(ctx) {
             return alert('Password don\'t matches!');
         }
 
-        await registerApi(email,password);
+        await registerApi(email,username,password);
         ctx.setUserNav();
         event.target.reset();
         ctx.page.redirect('/all-listings');

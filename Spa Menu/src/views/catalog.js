@@ -1,14 +1,14 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
-import { getAllCars } from '../api/data.js';
+import { getAllMassages } from '../api/data.js';
 
-const catalogTemplate = (allCars) => html`
+const catalogTemplate = (allMassages) => html`
 <section id="car-listings">
     <h1>Massage List</h1>
     <div class="listings">
 
         <!-- Display all records -->
-       ${allCars.length == 0 ? html`<p class="no-cars">No cars in database.</p>` 
-       : allCars.map(carTemplate)}
+       ${allMassages.length == 0 ? html`<p class="no-cars">No massages in database.</p>` 
+       : allMassages.map(carTemplate)}
        
        
         <!-- Display if there are no records -->
@@ -36,7 +36,8 @@ const carTemplate = (item) => html`
 
 export async function catalogPage(ctx) {
 
-    const allCars = await getAllCars();
-    
-    ctx.render(catalogTemplate(allCars));
+    const allMassages = await getAllMassages();
+   
+
+    ctx.render(catalogTemplate(allMassages.results));
 }
