@@ -66,7 +66,7 @@ export async function createPage(ctx) {
             time,
             imageUrl,
             price,
-           ownerId 
+            ownerId
           }
 
 

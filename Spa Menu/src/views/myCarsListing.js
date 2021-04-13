@@ -1,5 +1,5 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
-import { getMyCars } from '../api/data.js';
+import { getAllMassages } from '../api/data.js';
 
 const myTemplate = (myMassages) => html`
 <section id="my-listings">
@@ -7,6 +7,7 @@ const myTemplate = (myMassages) => html`
     <div class="listings">
 
         <!-- Display all records -->
+      
         ${myMassages.length == 0 ? html`
         <p class="no-cars"> You haven't listed any massage yet.</p>
         ` : myMassages.map(carTemplate)}
@@ -37,8 +38,11 @@ const carTemplate = (item) => html`
 
 export async function myListingsCars(ctx) {
 
-    const myMassages = await getMyCars();
-    console.log(myMassages);
-
-    ctx.render(myTemplate(myMassages));
+    const myMassages = await getAllMassages();
+    const userId = sessionStorage.getItem('userId');
+   
+    const result =  myMassages.results;
+    const filtered = result.filter(result => result.ownerId == userId);
+   
+    ctx.render(myTemplate(filtered));
 }

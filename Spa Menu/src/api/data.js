@@ -32,6 +32,7 @@ export async function getMyCars(){
 }
 
 export async function createCar(data){
+ 
     return await api.post(host + '/classes/spa_menu',data);
 }
 
