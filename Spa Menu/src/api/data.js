@@ -12,7 +12,7 @@ export async function getAllMassages(){
     return await api.get(host + '/classes/spa_menu');
 }
 
-export async function getCarsById(id){
+export async function getMassageById(id){
     return await api.get(host + '/classes/spa_menu/' + id);
 }
 
@@ -31,7 +31,7 @@ export async function getMyCars(){
     return await api.get(host + `/classes/spa_menu/` + userId);
 }
 
-export async function createCar(data){
+export async function createMassage(data){
  
     return await api.post(host + '/classes/spa_menu',data);
 }
@@ -40,11 +40,14 @@ export async function createCar(data){
 //     return await api.post(host + '/data/likes',data);
 // }
 
-export async function editCars(id, data){
-    return await api.put(host + '/classes/spa_menu/' + id, data);
+export async function editMassage(id, data){
+    
+    const response = await api.put(host + '/classes/spa_menu/' + id, data);
+   
+    return response
 }
 
-export async function deleteCar(id){
+export async function deleteMassage(id){
     return await api.del(host + '/classes/spa_menu/' + id);
 }
 

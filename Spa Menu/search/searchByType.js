@@ -1,12 +1,12 @@
 import { html } from '../node_modules/lit-html/lit-html.js';
 import {getAllMassages} from '../src/api/data.js'
 
-const searchTemplate = (data,onSearch,price) => html`
+const searchTemplate = (data,onSearch,type) => html`
 <section id="search-cars">
-    <h1>Filter By Price</h1>
+    <h1>Filter By Type</h1>
 
     <div class="container">
-        <input id="search-input" type="text" name="search" placeholder="Enter desired production year" .value=${price || ''}>
+        <input id="search-input" type="text" name="search" placeholder="Enter type" .value=${type || ''}>
         <button @click=${onSearch} class="button-list">Search</button>
     </div>
 
@@ -42,21 +42,26 @@ const itemTemplate = (item) => html`
 </div>
 `;
 
-export async function searchPage(ctx) {
+export async function searchPageType(ctx) {
     
-    const price = ctx.querystring.split('=')[1];
-   
+    const type = ctx.querystring.split('=')[1];
+
     const data = await getAllMassages();
     const result = data.results;
+ 
+    const filtered = result.filter(result => result.type == type)
     
-    const filtered = result.filter(result => result.price == price)
     const sorted = filtered.sort((a,b) => a.name.localeCompare(b.name));
     //const data = Number.isNaN(price) ? [] : await searchCars(price);
 
-    ctx.render(searchTemplate(sorted,onSearch,price));
+    ctx.render(searchTemplate(sorted,onSearch,type));
 
     function onSearch(){
-        const query = Number(document.getElementById('search-input').value);
-        ctx.page.redirect('/search?query=' + query);
+        const query = document.getElementById('search-input').value;
+        const first = query[0].toUpperCase();
+        const last = query.slice(1,);
+        const resultUpp = first + last;
+      
+        ctx.page.redirect('/searchType?query=' + resultUpp);
     }
 }

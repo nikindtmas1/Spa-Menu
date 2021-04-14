@@ -1,6 +1,6 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
-import {getCarsById} from '../api/data.js';
-import {deleteCar} from '../api/data.js';
+import {getMassageById} from '../api/data.js';
+import {deleteMassage} from '../api/data.js';
 
 const detailsTemplate = (item,isOwner,onDelete) => html`
 <section id="listing-details">
@@ -20,7 +20,7 @@ const detailsTemplate = (item,isOwner,onDelete) => html`
         ${isOwner ? html`
         <div class="listings-buttons">
             <a href=${`/edit/${item.objectId}`} class="button-list">Edit</a>
-            <a @click=${onDelete} href="/all-listings" class="button-list">Delete</a>
+            <a @click=${onDelete} href='/all-massages' class="button-list">Delete</a>
         </div>
         ` : ''}
         
@@ -32,9 +32,10 @@ export async function detailsPage(ctx) {
 
     const id = ctx.params.id;
 
-    const item = await getCarsById(id);
+    const item = await getMassageById(id);
  
     const userId = sessionStorage.getItem('userId');
+    
     
     ctx.render(detailsTemplate(item,item.ownerId == userId,onDelete));
 
@@ -43,9 +44,9 @@ export async function detailsPage(ctx) {
         const confirmed = confirm('Are you sure you want to delete this car-listing!');
         if(confirmed){
 
-            await deleteCar(item.objectId);
+            await deleteMassage(item.objectId);
 
-            ctx.page.redirect('/all-listings');
+            ctx.page.redirect('/all-massages');
         }
     }
 }

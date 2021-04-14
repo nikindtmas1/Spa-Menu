@@ -1,5 +1,5 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
-import {createCar} from '../api/data.js';
+import {createMassage} from '../api/data.js';
 
 const createTemplate = (onSubmit) => html`
 <section id="create-listing">
@@ -70,9 +70,9 @@ export async function createPage(ctx) {
           }
 
 
-            await createCar(data);
+            await createMassage(data);
             event.target.reset();
-            ctx.page.redirect('/all-listings');
+            ctx.page.redirect('/all-massages');
     }
 
 }

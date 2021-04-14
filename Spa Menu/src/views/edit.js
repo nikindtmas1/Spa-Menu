@@ -1,6 +1,6 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
-import {getCarsById} from '../api/data.js';
-import {editCars} from '../api/data.js';
+import {getMassageById} from '../api/data.js';
+import {editMassage} from '../api/data.js';
 
 const editTemplate = (item,onSubmit) => html`
     <section id="edit-listing">
@@ -40,7 +40,7 @@ export async function editPage(ctx) {
    
     const id = ctx.params.id;
     
-    const item = await getCarsById(id);
+    const item = await getMassageById(id);
   
     ctx.render(editTemplate(item,onSubmit));
 
@@ -55,10 +55,6 @@ export async function editPage(ctx) {
         const imageUrl = formData.get('imageUrl');
         const price = formData.get('price');
 
-        if(time == NaN || price == NaN){
-            return alert('The years end price must by positive number!');
-        }
-
         const data = {
             type,
             name,
@@ -68,7 +64,7 @@ export async function editPage(ctx) {
             price
         }
 
-        await editCars(item.objectId,data);
+        await editMassage(item.objectId,data);
         ctx.page.redirect(`/details/${item.objectId}`);
 
     }

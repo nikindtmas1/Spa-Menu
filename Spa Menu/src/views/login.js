@@ -47,7 +47,7 @@ export async function loginPage(ctx) {
    
         await loginApi(username,password);
         ctx.setUserNav();
-        ctx.page.redirect('/all-listings');
+        ctx.page.redirect('/all-massages');
     }
 
 }

@@ -27,12 +27,14 @@ const massageTemplate = (item) => html`
             <h3>Time: ${item.time} minute</h3>
             <h3>Price: ${item.price} $</h3>
         </div>
-       
+        <div class="data-buttons">
+            <a href=${`/details/${item.objectId}`} class="button-carDetails">Details</a>
+        </div>
     </div>
 </div>
 `;
 
-export async function catalogPage(ctx) {
+export async function catalogLoggedPage(ctx) {
 
     const allMassages = await getAllMassages();
     const dataResult = allMassages.results;

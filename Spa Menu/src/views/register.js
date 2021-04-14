@@ -57,7 +57,7 @@ export async function registerPage(ctx) {
         await registerApi(email,username,password);
         ctx.setUserNav();
         event.target.reset();
-        ctx.page.redirect('/all-listings');
+        ctx.page.redirect('/all-massages');
 
     }
 

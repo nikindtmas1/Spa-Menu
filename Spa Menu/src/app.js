@@ -11,8 +11,11 @@ import { catalogPage } from './views/catalog.js';
 import { createPage } from './views/createListing.js';
 import { detailsPage } from './views/details.js';
 import { editPage } from './views/edit.js';
-import { myListingsCars } from './views/myCarsListing.js';
+import { myListingsMassages } from './views/myListing.js';
 import { searchPage } from '../search/search.js';
+import { searchPageTime } from '../search/searchByTime.js';
+import { searchPageType } from '../search/searchByType.js';
+import { catalogLoggedPage } from './views/catalogLogged.js';
 
 
 window.api = api;
@@ -23,11 +26,14 @@ page('/',midWeare,homePage);
 page('/login',midWeare,loginPage);
 page('/register',midWeare,registerPage);
 page('/all-listings',midWeare,catalogPage);
+page('/all-massages',midWeare,catalogLoggedPage);
 page('/create',midWeare,createPage);
 page('/details/:id',midWeare,detailsPage);
 page('/edit/:id',midWeare,editPage);
-page('/myCarsList',midWeare,myListingsCars);
-page('/search',midWeare,searchPage)
+page('/myCarsList',midWeare,myListingsMassages);
+page('/search',midWeare,searchPage);
+page('/searchTime',midWeare,searchPageTime);
+page('/searchType',midWeare,searchPageType);
 
 
 setUserNav();
@@ -52,16 +58,22 @@ function setUserNav(){
     const userId = sessionStorage.getItem('userId');
     
     const username = sessionStorage.getItem('username');
+    
 
     if(userId != null){
-
+        
         document.getElementById('guest').style.display = 'none';
         document.getElementById('profile').style.display = '';
         document.getElementById('userId').textContent = `Welcome ${username}`;
+        document.getElementById('logged-user').style.display = '';
+        document.getElementById('unlogged-user').style.display = 'none';
     }else{
 
         document.getElementById('guest').style.display = '';
         document.getElementById('profile').style.display = 'none';
+        document.getElementById('logged-user').style.display = 'none';
+        document.getElementById('unlogged-user').style.display = '';
+
     }
 
 }

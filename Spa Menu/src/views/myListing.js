@@ -3,7 +3,7 @@ import { getAllMassages } from '../api/data.js';
 
 const myTemplate = (myMassages) => html`
 <section id="my-listings">
-    <h1>My massage list</h1>
+    <h1>My Massage List</h1>
     <div class="listings">
 
         <!-- Display all records -->
@@ -26,7 +26,7 @@ const carTemplate = (item) => html`
     <h2>${item.type} ${item.name}</h2>
     <div class="info">
         <div class="data-info">
-            <h3>Time: ${item.time}</h3>
+            <h3>Time: ${item.time} minute</h3>
             <h3>Price: ${item.price} $</h3>
         </div>
         <div class="data-buttons">
@@ -36,7 +36,7 @@ const carTemplate = (item) => html`
 </div>
 `;
 
-export async function myListingsCars(ctx) {
+export async function myListingsMassages(ctx) {
 
     const myMassages = await getAllMassages();
     const userId = sessionStorage.getItem('userId');
@@ -44,5 +44,7 @@ export async function myListingsCars(ctx) {
     const result =  myMassages.results;
     const filtered = result.filter(result => result.ownerId == userId);
    
-    ctx.render(myTemplate(filtered));
+    const sorted = filtered.sort((a,b) => a.name.localeCompare(b.name));
+
+    ctx.render(myTemplate(sorted));
 }
