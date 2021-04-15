@@ -56,9 +56,11 @@ function midWeare(ctx,next){
 function setUserNav(){
 
     const userId = sessionStorage.getItem('userId');
-    
+ 
     const username = sessionStorage.getItem('username');
-    
+
+    const email = sessionStorage.getItem('email');
+  
 
     if(userId != null){
         
@@ -67,12 +69,18 @@ function setUserNav(){
         document.getElementById('userId').textContent = `Welcome ${username}`;
         document.getElementById('logged-user').style.display = '';
         document.getElementById('unlogged-user').style.display = 'none';
+        if(userId == 'bLBc45Il6I' && username == 'Niki' && email == 'niki_nik_74@abv.bg'){
+            document.getElementById('ownerUser').style.display = '';
+        }else{
+            document.getElementById('ownerUser').style.display = 'none';
+        }
     }else{
 
         document.getElementById('guest').style.display = '';
         document.getElementById('profile').style.display = 'none';
         document.getElementById('logged-user').style.display = 'none';
         document.getElementById('unlogged-user').style.display = '';
+        document.getElementById('ownerUser').style.display = 'none';
 
     }
 
