@@ -4,8 +4,8 @@ Simple spa-menu application
 
 
 
- Author
-Nikolai Nikolaev
+# Author
+**Nikolai Nikolaev**
 
 email: nikindtmas1@gmail.com
 
